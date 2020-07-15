@@ -74,6 +74,56 @@ pd.date_range(start="7/1/2017", end="7/21/2017", freq=usb)
 
 
 
+# now create custom calender 
+
+from pandas.tseries.holiday import AbstractHolidayCalendar, nearest_workday, Holiday
+
+class myBirthdayCalendar(AbstractHolidayCalendar):
+    rules = [
+            Holiday("Anchit Birthday", month=1, day=20, observance=nearest_workday)
+            ]
+
+myc = CustomBusinessDay(calendar=myBirthdayCalendar())
+
+
+pd.date_range(start="1/1/2019", end="1/27/2019", freq=myc)
+
+
+# now for conturies like eyzpt where weekends are on friday and saturday
+# use week_mask attribute of CustomBusinessDay
+
+b = CustomBusinessDay(weekmask="Sun Mon Tue Wed Thu")
+
+pd.date_range(start="7/1/2020", end = "7/15/2020", freq=b)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
